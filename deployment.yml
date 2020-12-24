@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+        labels:
+                name: testingdeployment
+        name: testing-deployment
+spec:
+        replicas: 2
+        template:
+                metadata:
+                        labels:
+                                name: testingdeployment
+                spec:
+                        containers:
+                        - image: 9729232716/scale_registry:cicd_testimage
+                          name: testingdeployment
+                          ports:
+                          - name: testingdeployment
+                            containerPort: 8080
+
+---
+#Node Port service
+
+apiVersion: v1
+kind: Service
+metadata:
+        labels:
+                name: testingdeployment
+        name: testingdeployment
+spec:
+        type: NodePort
+        Ports:
+                - port: 3000
+                  targetPort: 8080
+        selector:
+                name: testingdeployment
+
