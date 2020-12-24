@@ -29,7 +29,7 @@ metadata:
         name: soldier
 spec:
         type: NodePort
-        Ports:
+        ports:
                 - port: 3000
                   targetPort: 8080
         selector:
