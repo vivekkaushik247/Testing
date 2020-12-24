@@ -2,20 +2,20 @@ apiVersion: v1
 kind: ReplicationController
 metadata:
         labels:
-                name: testingdeployment
-        name: testing-deployment
+                name: soldier
+        name: testing-soldier
 spec:
         replicas: 2
         template:
                 metadata:
                         labels:
-                                name: testingdeployment
+                                name: soldier
                 spec:
                         containers:
                         - image: 9729232716/scale_registry:cicd_testimage
-                          name: testingdeployment
+                          name: soldier
                           ports:
-                          - name: testingdeployment
+                          - name: soldier
                             containerPort: 8080
 
 ---
@@ -25,13 +25,13 @@ apiVersion: v1
 kind: Service
 metadata:
         labels:
-                name: testingdeployment
-        name: testingdeployment
+                name: soldier
+        name: soldier
 spec:
         type: NodePort
         Ports:
                 - port: 3000
                   targetPort: 8080
         selector:
-                name: testingdeployment
+                name: soldier
 
